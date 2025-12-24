@@ -1,54 +1,62 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Zap } from "lucide-react"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Zap } from "lucide-react";
 
 export default function SignupPage() {
-  const router = useRouter()
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [error, setError] = useState("")
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSignup = (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match")
-      return
+      setError("Passwords do not match");
+      return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters")
-      return
+      setError("Password must be at least 6 characters");
+      return;
     }
 
     // Check if user already exists
-    const users = JSON.parse(localStorage.getItem("apicraft_users") || "[]")
-    const existingUser = users.find((u: any) => u.email === email)
+    const users = JSON.parse(localStorage.getItem("apicraft_users") || "[]");
+    //eslint-disable-next-line
+    const existingUser = users.find((u: any) => u.email === email);
 
     if (existingUser) {
-      setError("User already exists with this email")
-      return
+      setError("User already exists with this email");
+      return;
     }
 
     // Create new user
-    users.push({ name, email, password })
-    localStorage.setItem("apicraft_users", JSON.stringify(users))
-    localStorage.setItem("apicraft_user", JSON.stringify({ email, name }))
+    users.push({ name, email, password });
+    localStorage.setItem("apicraft_users", JSON.stringify(users));
+    localStorage.setItem("apicraft_user", JSON.stringify({ email, name }));
 
-    router.push("/dashboard")
-  }
+    router.push("/dashboard");
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
@@ -57,8 +65,12 @@ export default function SignupPage() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
             <Zap className="h-7 w-7 text-primary-foreground" />
           </div>
-          <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
-          <CardDescription>Enter your information to get started with API Craft</CardDescription>
+          <CardTitle className="text-2xl font-bold">
+            Create an account
+          </CardTitle>
+          <CardDescription>
+            Enter your information to get started with API Craft
+          </CardDescription>
         </CardHeader>
         <form onSubmit={handleSignup}>
           <CardContent className="space-y-4">
@@ -114,7 +126,10 @@ export default function SignupPage() {
             </Button>
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/login" className="font-medium text-primary hover:underline">
+              <Link
+                href="/login"
+                className="font-medium text-primary hover:underline"
+              >
                 Sign in
               </Link>
             </p>
@@ -122,5 +137,5 @@ export default function SignupPage() {
         </form>
       </Card>
     </div>
-  )
+  );
 }

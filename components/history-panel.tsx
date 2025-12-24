@@ -56,11 +56,13 @@ export function HistoryPanel({ onLoadRequest }: HistoryPanelProps) {
                     variant="outline"
                     className={cn(
                       "font-mono text-xs",
-                      item.method === "GET" && "border-green-600/50 text-green-600 dark:text-green-400",
-                      item.method === "POST" && "border-blue-600/50 text-blue-600 dark:text-blue-400",
-                      item.method === "PUT" && "border-orange-600/50 text-orange-600 dark:text-orange-400",
-                      item.method === "PATCH" && "border-yellow-600/50 text-yellow-600 dark:text-yellow-400",
-                      item.method === "DELETE" && "border-red-600/50 text-red-600 dark:text-red-400",
+                      item.method === "GET" && "border-[var(--color-method-get)]/50 text-[var(--color-method-get)]",
+                      item.method === "POST" && "border-[var(--color-method-post)]/50 text-[var(--color-method-post)]",
+                      item.method === "PUT" && "border-[var(--color-method-put)]/50 text-[var(--color-method-put)]",
+                      item.method === "PATCH" &&
+                        "border-[var(--color-method-patch)]/50 text-[var(--color-method-patch)]",
+                      item.method === "DELETE" &&
+                        "border-[var(--color-method-delete)]/50 text-[var(--color-method-delete)]",
                     )}
                   >
                     {item.method}

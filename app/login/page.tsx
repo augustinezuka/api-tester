@@ -1,37 +1,50 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Zap } from "lucide-react"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Zap } from "lucide-react";
 
 export default function LoginPage() {
-  const router = useRouter()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
     // Check if user exists
-    const users = JSON.parse(localStorage.getItem("apicraft_users") || "[]")
-    const user = users.find((u: any) => u.email === email && u.password === password)
+    const users = JSON.parse(localStorage.getItem("apicraft_users") || "[]");
+    const user = users.find(
+      //eslint-disable-next-line
+      (u: any) => u.email === email && u.password === password,
+    );
 
     if (user) {
-      localStorage.setItem("apicraft_user", JSON.stringify({ email: user.email, name: user.name }))
-      router.push("/dashboard")
+      localStorage.setItem(
+        "apicraft_user",
+        JSON.stringify({ email: user.email, name: user.name }),
+      );
+      router.push("/dashboard");
     } else {
-      setError("Invalid email or password")
+      setError("Invalid email or password");
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
@@ -40,8 +53,12 @@ export default function LoginPage() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
             <Zap className="h-7 w-7 text-primary-foreground" />
           </div>
-          <CardTitle className="text-2xl font-bold">Welcome to API Craft</CardTitle>
-          <CardDescription>Enter your credentials to access your API testing workspace</CardDescription>
+          <CardTitle className="text-2xl font-bold">
+            Welcome to API Craft
+          </CardTitle>
+          <CardDescription>
+            Enter your credentials to access your API testing workspace
+          </CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
@@ -74,8 +91,11 @@ export default function LoginPage() {
               Sign In
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
-              <Link href="/signup" className="font-medium text-primary hover:underline">
+              {"Don't have an account? "}
+              <Link
+                href="/signup"
+                className="font-medium text-primary hover:underline"
+              >
                 Sign up
               </Link>
             </p>
@@ -83,5 +103,5 @@ export default function LoginPage() {
         </form>
       </Card>
     </div>
-  )
+  );
 }
