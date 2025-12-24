@@ -1,8 +1,17 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Zap, Code2, History, Shield, Rocket, Globe, Database, Radio } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Zap,
+  Code2,
+  History,
+  Shield,
+  Rocket,
+  Globe,
+  Database,
+  Radio,
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -29,24 +38,22 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
-        <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20">Professional API Testing Tool</Badge>
+        <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20">
+          Professional API Testing Tool
+        </Badge>
         <h1 className="mb-6 text-balance text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
           Test APIs with Confidence
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-pretty text-lg text-muted-foreground">
-          A powerful, intuitive API testing platform supporting REST, GraphQL, and WebSocket protocols. Built for
-          developers who demand precision and speed.
+          A powerful, intuitive API testing platform supporting REST, GraphQL,
+          and WebSocket protocols. Built for developers who demand precision and
+          speed.
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link href="/signup">
             <Button size="lg" className="gap-2">
               <Rocket className="h-4 w-4" />
               Start Testing Free
-            </Button>
-          </Link>
-          <Link href="/login">
-            <Button size="lg" variant="outline">
-              View Demo
             </Button>
           </Link>
         </div>
@@ -60,9 +67,12 @@ export default function Home() {
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <Code2 className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-card-foreground">All HTTP Methods</h3>
+              <h3 className="text-lg font-semibold text-card-foreground">
+                All HTTP Methods
+              </h3>
               <p className="text-sm text-muted-foreground">
-                Support for GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS requests
+                Support for GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS
+                requests
               </p>
             </CardContent>
           </Card>
@@ -72,7 +82,9 @@ export default function Home() {
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <Globe className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-card-foreground">GraphQL Support</h3>
+              <h3 className="text-lg font-semibold text-card-foreground">
+                GraphQL Support
+              </h3>
               <p className="text-sm text-muted-foreground">
                 Test GraphQL queries and mutations with built-in schema explorer
               </p>
@@ -84,7 +96,9 @@ export default function Home() {
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <Radio className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-card-foreground">WebSocket Testing</h3>
+              <h3 className="text-lg font-semibold text-card-foreground">
+                WebSocket Testing
+              </h3>
               <p className="text-sm text-muted-foreground">
                 Real-time WebSocket connection testing with message history
               </p>
@@ -96,8 +110,12 @@ export default function Home() {
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <History className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-card-foreground">Request History</h3>
-              <p className="text-sm text-muted-foreground">Automatic history tracking with local storage persistence</p>
+              <h3 className="text-lg font-semibold text-card-foreground">
+                Request History
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Automatic history tracking with local storage persistence
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -107,9 +125,12 @@ export default function Home() {
       <section className="border-y border-border bg-muted/50 py-16">
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground">Everything you need to test APIs</h2>
+            <h2 className="mb-4 text-3xl font-bold text-foreground">
+              Everything you need to test APIs
+            </h2>
             <p className="mb-12 text-muted-foreground">
-              From simple REST calls to complex GraphQL queries and real-time WebSocket connections
+              From simple REST calls to complex GraphQL queries and real-time
+              WebSocket connections
             </p>
           </div>
 
@@ -118,9 +139,12 @@ export default function Home() {
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                 <Shield className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="mb-2 text-xl font-semibold text-foreground">Secure Testing</h3>
+              <h3 className="mb-2 text-xl font-semibold text-foreground">
+                Secure Testing
+              </h3>
               <p className="text-sm text-muted-foreground">
-                All requests are processed securely with full header and authentication support
+                All requests are processed securely with full header and
+                authentication support
               </p>
             </div>
 
@@ -128,9 +152,12 @@ export default function Home() {
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                 <Database className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="mb-2 text-xl font-semibold text-foreground">Data Persistence</h3>
+              <h3 className="mb-2 text-xl font-semibold text-foreground">
+                Data Persistence
+              </h3>
               <p className="text-sm text-muted-foreground">
-                Your request history is saved locally, so you never lose your work
+                Your request history is saved locally, so you never lose your
+                work
               </p>
             </div>
 
@@ -138,7 +165,9 @@ export default function Home() {
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                 <Zap className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="mb-2 text-xl font-semibold text-foreground">Lightning Fast</h3>
+              <h3 className="mb-2 text-xl font-semibold text-foreground">
+                Lightning Fast
+              </h3>
               <p className="text-sm text-muted-foreground">
                 Built with Next.js and React Query for optimal performance
               </p>
@@ -149,7 +178,9 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-20 text-center">
-        <h2 className="mb-4 text-3xl font-bold text-foreground">Ready to streamline your API testing?</h2>
+        <h2 className="mb-4 text-3xl font-bold text-foreground">
+          Ready to streamline your API testing?
+        </h2>
         <p className="mx-auto mb-8 max-w-xl text-muted-foreground">
           Join developers who trust API Craft for their API testing needs
         </p>
@@ -168,5 +199,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
