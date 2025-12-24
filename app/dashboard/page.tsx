@@ -32,6 +32,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DarkLightToggle } from "@/components/mode-toggle";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -127,6 +128,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="flex items-center gap-2">
+            <DarkLightToggle />
             <EnvironmentPanel />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

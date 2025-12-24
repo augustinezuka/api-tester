@@ -32,12 +32,8 @@ export function CodeGenerator({ config }: CodeGeneratorProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
 
-  const getHeadersArray = () => {
-    if (!config.headers) return [];
-    return Object.entries(config.headers).filter(
-      ([key, value]) => key && value,
-    );
-  };
+  const getHeadersArray = () =>
+    Object.entries(config.headers || {}).filter(([key, value]) => key && value);
 
   const generateCurl = () => {
     let curl = `curl -X ${config.method} '${config.url}'`;
@@ -72,7 +68,7 @@ axios({
 
 response = requests.${config.method.toLowerCase()}(
   "${config.url}",
-  headers=${JSON.stringify(config.headers, null, 2).replace(/"/g, "'")},
+  headers=${JSON.stringify(config.headers, null, 2)},
   ${config.body ? `json=${JSON.stringify(config.body, null, 2)}` : ""}
 )
 
@@ -105,7 +101,9 @@ uri = URI('${config.url}')
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
-request = Net::HTTP::${config.method.toLowerCase().replace(/^./, (c) => c.toUpperCase())}.new(uri)
+request = Net::HTTP::${config.method
+    .toLowerCase()
+    .replace(/^./, (c) => c.toUpperCase())}.new(uri)
 
 ${getHeadersArray()
   .map(([k, v]) => `request['${k}'] = '${v}'`)
@@ -173,47 +171,41 @@ client.newCall(request).execute();`;
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-5xl max-h-[85vh] w-[90vw]">
+      <DialogContent className="min-w-fit h-fit">
         <DialogHeader>
           <DialogTitle>Generate Code</DialogTitle>
         </DialogHeader>
 
-        <Tabs defaultValue="curl" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
+        <Tabs defaultValue="curl">
+          <TabsList className=" w-full g">
             {Object.keys(codes).map((k) => (
-              <TabsTrigger key={k} value={k} className="text-xs lg:text-sm">
+              <TabsTrigger key={k} value={k}>
                 {k.toUpperCase()}
               </TabsTrigger>
             ))}
           </TabsList>
 
           {Object.entries(codes).map(([key, { code, lang }]) => (
-            <TabsContent key={key} value={key} className="mt-4">
+            <TabsContent key={key} value={key}>
               <div className="relative">
                 <Button
                   size="icon"
                   variant="ghost"
-                  className="absolute right-2 top-2 z-10 bg-background/80 backdrop-blur-sm hover:bg-background"
+                  className="absolute right-2 top-2"
                   onClick={() => copy(code, key)}
                 >
                   {copied === key ? (
-                    <Check className="h-4 w-4 text-green-500" />
+                    <Check className="h-4 w-4" />
                   ) : (
                     <Copy className="h-4 w-4" />
                   )}
                 </Button>
 
-                <ScrollArea className="h-[480px] rounded-md border border-border bg-muted">
+                <ScrollArea className="h-fit rounded-md border ">
                   <SyntaxHighlighter
                     language={lang}
                     style={oneDark}
-                    customStyle={{
-                      margin: 0,
-                      background: "transparent",
-                      fontSize: "0.875rem",
-                      padding: "1rem",
-                    }}
-                    showLineNumbers
+                    customStyle={{ height: "100%" }}
                   >
                     {code}
                   </SyntaxHighlighter>

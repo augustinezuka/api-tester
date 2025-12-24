@@ -1,37 +1,47 @@
-"use client"
+"use client";
 
-import { Card } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Loader2, CheckCircle2, XCircle, Clock, Copy, Check } from "lucide-react"
-import { JsonTreeViewer } from "@/components/json-tree-viewer"
-import { useState } from "react"
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Loader2,
+  CheckCircle2,
+  XCircle,
+  Clock,
+  Copy,
+  Check,
+} from "lucide-react";
+import { JsonTreeViewer } from "@/components/json-tree-viewer";
+import { useState } from "react";
 
 interface ResponsePanelProps {
-  response: any
-  isLoading: boolean
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  response: any;
+  isLoading: boolean;
 }
 
 export function ResponsePanel({ response, isLoading }: ResponsePanelProps) {
-  const [copied, setCopied] = useState(false)
-  const [viewMode, setViewMode] = useState<"tree" | "raw">("tree")
+  const [copied, setCopied] = useState(false);
+  const [viewMode, setViewMode] = useState<"tree" | "raw">("tree");
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   if (isLoading) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center">
           <Loader2 className="mx-auto h-8 w-8 animate-spin text-primary" />
-          <p className="mt-2 text-sm text-muted-foreground">Sending request...</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Sending request...
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
   if (!response) {
@@ -39,13 +49,15 @@ export function ResponsePanel({ response, isLoading }: ResponsePanelProps) {
       <div className="flex h-full items-center justify-center">
         <div className="text-center">
           <p className="text-sm text-muted-foreground">No response yet</p>
-          <p className="mt-1 text-xs text-muted-foreground">Configure and send a request to see the response</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Configure and send a request to see the response
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
-  const hasError = response.error || response.status >= 400
+  const hasError = response.error || response.status >= 400;
 
   return (
     <div className="flex h-full flex-col">
@@ -56,13 +68,15 @@ export function ResponsePanel({ response, isLoading }: ResponsePanelProps) {
             {hasError ? (
               <XCircle className="h-5 w-5 text-destructive" />
             ) : (
-              <CheckCircle2 className="h-5 w-5 text-[var(--color-success)]" />
+              <CheckCircle2 className="h-5 w-5 text-success" />
             )}
-            <span className="text-sm font-medium">{response.error ? "Error" : "Success"}</span>
+            <span className="text-sm font-medium">
+              {response.error ? "Error" : "Success"}
+            </span>
           </div>
 
           {response.status && (
-            <Badge variant={hasError ? "destructive" : "default"}>
+            <Badge variant={hasError ? "destructive" : "success"}>
               {response.status} {response.statusText}
             </Badge>
           )}
@@ -112,11 +126,17 @@ export function ResponsePanel({ response, isLoading }: ResponsePanelProps) {
                   size="sm"
                   onClick={() =>
                     copyToClipboard(
-                      typeof response.data === "string" ? response.data : JSON.stringify(response.data, null, 2),
+                      typeof response.data === "string"
+                        ? response.data
+                        : JSON.stringify(response.data, null, 2),
                     )
                   }
                 >
-                  {copied ? <Check className="h-3 w-3 mr-1" /> : <Copy className="h-3 w-3 mr-1" />}
+                  {copied ? (
+                    <Check className="h-3 w-3 mr-1" />
+                  ) : (
+                    <Copy className="h-3 w-3 mr-1" />
+                  )}
                   Copy
                 </Button>
               </div>
@@ -128,7 +148,9 @@ export function ResponsePanel({ response, isLoading }: ResponsePanelProps) {
                   <JsonTreeViewer data={response.data} />
                 ) : (
                   <pre className="overflow-auto text-xs text-foreground">
-                    {typeof response.data === "string" ? response.data : JSON.stringify(response.data, null, 2)}
+                    {typeof response.data === "string"
+                      ? response.data
+                      : JSON.stringify(response.data, null, 2)}
                   </pre>
                 )}
               </Card>
@@ -149,5 +171,5 @@ export function ResponsePanel({ response, isLoading }: ResponsePanelProps) {
         )}
       </div>
     </div>
-  )
+  );
 }
